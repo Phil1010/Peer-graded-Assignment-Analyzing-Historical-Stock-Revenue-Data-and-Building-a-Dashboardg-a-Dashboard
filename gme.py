@@ -29,6 +29,8 @@ gme_data = yf.Ticker("gme")
 gme_data = gme_data.history(period="max")
 gme_data.reset_index(inplace=True)
 
+print(gme_data.head())
+
 url = "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0220EN-SkillsNetwork/labs/project/stock.html"
 html_data = requests.get(url).text
 soup = BeautifulSoup(html_data, "html.parser")
@@ -37,8 +39,6 @@ gme_revenue = pd.DataFrame(columns=["Date", "Revenue"])
 
 # Find all tables on the webpage
 tables = soup.find_all('table')
-
-print(tables)
 
 # Loop through each table to find the relevant one
 for table in tables:
@@ -58,7 +58,7 @@ for table in tables:
                 gme_revenue = pd.concat([gme_revenue, temp_df], ignore_index=True)
 
 # Display the DataFrame
-# print(gme_revenue)
+print(gme_revenue.tail())
 
 
 make_graph(gme_data, gme_revenue, "gme")

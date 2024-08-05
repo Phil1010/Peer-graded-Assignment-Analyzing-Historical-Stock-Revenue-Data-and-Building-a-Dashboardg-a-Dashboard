@@ -29,7 +29,7 @@ tesla_data = yf.Ticker("TSLA")
 tesla_data = tesla_data.history(period="max")
 tesla_data.reset_index(inplace=True)
 
-print(tesla_data.tail())
+print(tesla_data.head())
 
 url = "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0220EN-SkillsNetwork/labs/project/revenue.htm"
 html_data = requests.get(url).text
@@ -63,5 +63,7 @@ tesla_revenue["Revenue"] = tesla_revenue['Revenue'].str.replace(',|\$',"", regex
 tesla_revenue.dropna(inplace=True)
 
 tesla_revenue = tesla_revenue[tesla_revenue['Revenue'] != ""]
+
+print(tesla_revenue.tail())
 
 make_graph(tesla_data, tesla_revenue, 'Tesla')
